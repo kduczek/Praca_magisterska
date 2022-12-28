@@ -48,4 +48,9 @@ public class HomePageSteps {
     public void verifyIfSignedOutHeaderIsNotVisible() {
         Assert.assertFalse(homePage.isElementVisible(homePage.getSignedOutMessage()), "Signed out message was visible");
     }
+
+    @When("user searches for {string}")
+    public void searchFor(String item) {
+        topMenuPage.searchForItem(item);
+    }
 }

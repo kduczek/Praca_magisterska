@@ -21,6 +21,14 @@ public class BasePage {
         getDriver().findElement(element).sendKeys(value);
     }
 
+    public void clearInput(By element) {
+        getDriver().findElement(element).clear();
+    }
+
+    public void sendKey(By element, Keys key) {
+        getDriver().findElement(element).sendKeys(key);
+    }
+
     public boolean isElementVisible(By element) {
         try {
             return getDriver().findElement(element).isDisplayed();
