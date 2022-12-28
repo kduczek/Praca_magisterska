@@ -1,4 +1,4 @@
-package runner;
+package runners;
 
 import org.testng.ITestContext;
 import org.testng.ITestListener;

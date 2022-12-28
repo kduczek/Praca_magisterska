@@ -3,12 +3,12 @@
 <suite name="LUMA Shop Suite">
 
     <listeners>
-        <listener class-name="runner.NGTestListener"/>
+        <listener class-name="runners.NGTestListener"/>
     </listeners>
 
     <test name="AllTests">
         <classes>
-            <class name="runner.TestRunner"/>
+            <class name="runners.TestRunner"/>
         </classes>
     </test>
 </suite>
