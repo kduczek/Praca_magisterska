@@ -31,4 +31,8 @@ public class DriverProvider {
     public static WebDriver getDriver() {
         return driver;
     }
+
+    public static void closeDriver() {
+        driver.quit();
+    }
 }
