@@ -46,3 +46,6 @@ Feature: Using search feature in Luma Shop
     Then current page should be equal to 3
     And search results indicator should be equal to "Items 25-26 of 26"
     And number of elements on page should be equal to 2
+
+    #TODO zrobic sortowanie, ale do tego trzeba sprawnej paginacji
+

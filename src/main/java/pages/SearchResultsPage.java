@@ -12,6 +12,7 @@ public class SearchResultsPage extends BasePage {
     private final By previousPageArrow = By.xpath("//a[@title='Previous']");
     private final By nextPageArrow = By.xpath("//a[@title='Next']");
     private final By currentPageNumber = By.xpath("//span[contains(text(), 'currently reading page')]/following-sibling::span");
+    private final String productLinkByName = "//strong[contains(@class, 'product-item-name')]//a[normalize-space(.)='[NAME]']";
 
 
     public By getNumberOfElements() {
@@ -48,5 +49,9 @@ public class SearchResultsPage extends BasePage {
 
     public By getCurrentPageNumber() {
         return currentPageNumber;
+    }
+
+    public By getProductLinkByName(String name) {
+        return By.xpath(productLinkByName.replace("[NAME]", name));
     }
 }

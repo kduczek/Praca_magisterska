@@ -59,4 +59,9 @@ public class SearchResultsSteps {
                 String.valueOf(expectedNumber),
                 "Wrong current page");
     }
+
+    @When("user clicks on {string} product link")
+    public void clickProductLink(String productName) {
+        searchResultsPage.clickElement(searchResultsPage.getProductLinkByName(productName));
+    }
 }
