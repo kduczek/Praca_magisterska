@@ -60,4 +60,9 @@ public class ProductPageSteps {
     public void clickAddToWishList() {
         productPage.clickElement(productPage.getAddToWishListButton());
     }
+
+    @When("user clicks Add to compare button")
+    public void clickAddToCompare() {
+        productPage.clickElement(productPage.getAddToCompareButton());
+    }
 }
