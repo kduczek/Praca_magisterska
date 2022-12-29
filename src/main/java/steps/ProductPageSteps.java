@@ -1,5 +1,6 @@
 package steps;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -64,5 +65,25 @@ public class ProductPageSteps {
     @When("user clicks Add to compare button")
     public void clickAddToCompare() {
         productPage.clickElement(productPage.getAddToCompareButton());
+    }
+
+    @When("user clicks on Reviews tab")
+    public void clickReviewsTab() {
+        productPage.clickElement(productPage.getReviewsTab());
+    }
+
+    @When("user selects {int} star(s)")
+    public void selectStars(int countOfStars) {
+        productPage.pickStars(countOfStars);
+    }
+
+    @When("user fills review fields as follows")
+    public void fillReviewFields(DataTable dataTable) {
+        productPage.fillReviewFields(dataTable);
+    }
+
+    @When("user clicks Submit Review button")
+    public void clickSubmitReviewButton() {
+        productPage.clickElement(productPage.getSubmitReviewButton());
     }
 }

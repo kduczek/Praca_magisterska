@@ -1,6 +1,9 @@
 package pages;
 
+import io.cucumber.datatable.DataTable;
 import org.openqa.selenium.By;
+
+import java.util.Map;
 
 public class ProductPage extends BasePage{
     private final String sizeButton = "//div[@option-label='[SIZE]']";
@@ -12,6 +15,15 @@ public class ProductPage extends BasePage{
     private final By productPageMessagePrompt = By.xpath("//div[@class='messages']");
     private final By addToWishListButton = By.xpath("//a[@data-action='add-to-wishlist']");
     private final By addToCompareButton = By.xpath("//a[@data-role='add-to-links']");
+
+    //ADDING REVIEW
+    private final By reviewsTab = By.xpath("//a[contains(text(), 'Reviews')]");
+    private final String starsInput = "//input[@id='Rating_[NO_OF_STARS]']";
+    private final By nicknameInput = By.xpath("//input[@name='nickname']");
+    private final By summaryInput = By.xpath("//input[@name='title']");
+    private final By reviewInput = By.xpath("//textarea[@name='detail']");
+    private final By submitReviewButton = By.xpath("//button[normalize-space(.)='Submit Review']");
+
 
     public By getSizeButton(String size) {
         return By.xpath(sizeButton.replace("[SIZE]", size));
@@ -47,5 +59,37 @@ public class ProductPage extends BasePage{
 
     public By getAddToCompareButton() {
         return addToCompareButton;
+    }
+
+    public By getReviewsTab() {
+        return reviewsTab;
+    }
+
+    public void pickStars(int starsCount) {
+        clickElementJS(By.xpath(starsInput.replace("[NO_OF_STARS]", String.valueOf(starsCount))));
+    }
+
+    public By getNicknameInput() {
+        return nicknameInput;
+    }
+
+    public By getSummaryInput() {
+        return summaryInput;
+    }
+
+    public By getReviewInput() {
+        return reviewInput;
+    }
+
+    public By getSubmitReviewButton() {
+        return submitReviewButton;
+    }
+
+    public void fillReviewFields(DataTable dataTable) {
+        Map<String, String> values = dataTable.asMaps().get(0);
+
+        inputValue(getNicknameInput(), values.get("Nickname"));
+        inputValue(getSummaryInput(), values.get("Summary"));
+        inputValue(getReviewInput(), values.get("Review"));
     }
 }

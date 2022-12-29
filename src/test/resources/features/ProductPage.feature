@@ -45,3 +45,19 @@ Feature: Product page in Luma Shop
     When user clicks on "Layla Tee" product link
     And user clicks Add to compare button
     Then product page success message with "You added product Layla Tee to the comparison list." text should be visible
+
+  @Searching @ProductPage
+  Scenario: User adds a review to the product
+  https://magisterka.atlassian.net/browse/PRAC-24
+
+    When user searches for "LAYLA"
+    Then search results indicator should be equal to "1 Item"
+    And number of elements on page should be equal to 1
+    When user clicks on "Layla Tee" product link
+    And user clicks on Reviews tab
+    And user selects 4 stars
+    And user fills review fields as follows
+      | Nickname  | Summary    | Review                 |
+      | Test user | My Summary | This is a nice T-Shirt |
+    And user clicks Submit Review button
+    Then product page success message with "You submitted your review for moderation." text should be visible
