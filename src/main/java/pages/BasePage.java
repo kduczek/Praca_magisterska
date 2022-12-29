@@ -1,10 +1,7 @@
 package pages;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
 import java.util.function.Function;
@@ -27,6 +24,22 @@ public class BasePage {
 
     public void sendKey(By element, Keys key) {
         getDriver().findElement(element).sendKeys(key);
+    }
+
+    public void scrollElementIntoView(By element) throws InterruptedException {
+        WebElement webElement = getDriver().findElement(element);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", webElement);
+        Thread.sleep(500);
+    }
+
+    public void selectFromDropdownByValue(By element, String value) throws InterruptedException {
+        scrollElementIntoView(element);
+        Select dropdown = new Select(getDriver().findElement(element));
+        dropdown.selectByValue(value);
+    }
+
+    public int getCountOfElements(By elements) {
+        return getDriver().findElements(elements).size();
     }
 
     public boolean isElementVisible(By element) {
