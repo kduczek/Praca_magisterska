@@ -25,9 +25,38 @@ public class SearchResultsSteps {
         Assert.assertEquals(searchResultsPage.getCountOfElements(searchResultsPage.getProductContainer()), expectedNumber, "Number of elements doesn't match");
     }
 
-    @When("user changes pagination to {string}")
-    public void changePagination(String value) throws InterruptedException {
-        searchResultsPage.selectFromDropdownByValue(searchResultsPage.getPaginationDropdown(), value);
+    @When("user changes pagination to {int}")
+    public void changePagination(int value) throws InterruptedException {
+        searchResultsPage.selectFromDropdownByVisibleText(searchResultsPage.getPaginationDropdown(), String.valueOf(value));
         searchResultsPage.waitForPageToLoad();
+    }
+
+    @When("user goes to {int} st/nd/rd/th page")
+    public void goToPage(int pageNumber) {
+        searchResultsPage.clickElementJS(searchResultsPage.getPageLink(pageNumber));
+    }
+
+    @When("user clicks next page arrow")
+    public void clickNextPageArrow() {
+        searchResultsPage.clickElementJS(searchResultsPage.getNextPageArrow());
+        searchResultsPage.waitForPageToLoad();
+    }
+
+    @When("user clicks previous page arrow")
+    public void clickPreviousPageArrow() {
+        searchResultsPage.clickElementJS(searchResultsPage.getPreviousPageArrow());
+        searchResultsPage.waitForPageToLoad();
+    }
+
+    @When("user clicks on {int} page link number")
+    public void clickPageNumber(int pageNumber) {
+        searchResultsPage.clickElement(searchResultsPage.getPageLink(pageNumber));
+    }
+
+    @Then("current page should be equal to {int}")
+    public void verifyCurrentPageNumber(int expectedNumber) {
+        Assert.assertEquals(searchResultsPage.getAttribute(searchResultsPage.getCurrentPageNumber(), "innerHTML"),
+                String.valueOf(expectedNumber),
+                "Wrong current page");
     }
 }

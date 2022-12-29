@@ -14,6 +14,12 @@ public class BasePage {
         getDriver().findElement(element).click();
     }
 
+    public void clickElementJS(By element) {
+        WebElement webElement = getDriver().findElement(element);
+        JavascriptExecutor executor = (JavascriptExecutor)getDriver();
+        executor.executeScript("arguments[0].click();", webElement);
+    }
+
     public void inputValue(By element, String value) {
         getDriver().findElement(element).sendKeys(value);
     }
@@ -38,6 +44,12 @@ public class BasePage {
         dropdown.selectByValue(value);
     }
 
+    public void selectFromDropdownByVisibleText(By element, String value) throws InterruptedException {
+        scrollElementIntoView(element);
+        Select dropdown = new Select(getDriver().findElement(element));
+        dropdown.selectByVisibleText(value);
+    }
+
     public int getCountOfElements(By elements) {
         return getDriver().findElements(elements).size();
     }
@@ -56,9 +68,18 @@ public class BasePage {
         return result.trim();
     }
 
+    public String getAttribute(By element, String attribute) {
+        return getDriver().findElement(element).getAttribute(attribute);
+    }
+
     public void waitForElementIsVisible(By element, int time, int interval) {
         WebDriverWait waitDriver = new WebDriverWait(getDriver(), Duration.ofSeconds(time), Duration.ofMillis(interval));
         waitDriver.until(ExpectedConditions.visibilityOfElementLocated(element));
+    }
+
+    public void waitForElementToBeClickable(By element, int time, int interval) {
+        WebDriverWait waitDriver = new WebDriverWait(getDriver(), Duration.ofSeconds(time), Duration.ofMillis(interval));
+        waitDriver.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public void reloadPage() {
