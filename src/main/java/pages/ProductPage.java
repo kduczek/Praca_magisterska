@@ -8,6 +8,7 @@ public class ProductPage extends BasePage{
     private final By quantityInput = By.xpath("//input[@name='qty']");
     private final By addToCartButton = By.xpath("//button[@title='Add to Cart']");
     private final By requiredFieldError = By.xpath("//div[@class='mage-error']");
+    private final By quantityError = By.xpath("//div[@id='qty-error']");
     private final By addedToCartMessage = By.xpath("//div[@class='messages']");
 
     public By getSizeButton(String size) {
@@ -28,6 +29,10 @@ public class ProductPage extends BasePage{
 
     public By getRequiredFieldError() {
         return requiredFieldError;
+    }
+
+    public By getQuantityError() {
+        return quantityError;
     }
 
     public By getAddedToCartMessage() {

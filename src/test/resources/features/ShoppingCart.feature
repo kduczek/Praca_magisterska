@@ -3,7 +3,7 @@ Feature: Using shopping cart feature in Luma Shop
   Background:
     Given user is on Luma Shop home page "https://magento.softwaretestingboard.com"
 
-  @Searching @ShoppingCart
+  @Searching @ShoppingCart @ProductPage
   Scenario: Search for a product and add it to the cart
   https://magisterka.atlassian.net/browse/PRAC-16
 
@@ -16,4 +16,3 @@ Feature: Using shopping cart feature in Luma Shop
     And user inputs 2 into Qty field
     And user clicks Add to Cart button
     Then add to cart success message with "You added Layla Tee to your shopping cart." text should be visible
-

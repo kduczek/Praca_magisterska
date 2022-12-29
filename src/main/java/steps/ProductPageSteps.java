@@ -24,6 +24,11 @@ public class ProductPageSteps {
         productPage.inputValue(productPage.getQuantityInput(), String.valueOf(qty));
     }
 
+    @When("user clears Qty field")
+    public void clearQty() {
+        productPage.clearInput(productPage.getQuantityInput());
+    }
+
     @When("user clicks Add to Cart button")
     public void clickAddToCart() {
         productPage.clickElement(productPage.getAddToCartButton());
@@ -32,5 +37,20 @@ public class ProductPageSteps {
     @Then("add to cart success message with {string} text should be visible")
     public void verifyVisibilityOfCartMessage(String message) {
         Assert.assertEquals(productPage.getText(productPage.getAddedToCartMessage()), message, "Wrong message");
+    }
+
+    @Then("validation message \"This is a required field.\" should be visible")
+    public void verifyVisibilityOfValidationMessage() {
+        Assert.assertTrue(productPage.isElementVisible(productPage.getRequiredFieldError()), "Validation message wasn't visible");
+    }
+
+    @Then("validation message \"This is a required field.\" should not be visible")
+    public void verifyInvisibilityOfValidationMessage() {
+        Assert.assertFalse(productPage.isElementVisible(productPage.getRequiredFieldError()), "Validation message wasn't visible");
+    }
+
+    @Then("quantity error message with {string} text should be visible")
+    public void verifyQuantityMessage(String message) {
+        Assert.assertEquals(productPage.getText(productPage.getQuantityError()), message, "Error message was different");
     }
 }
