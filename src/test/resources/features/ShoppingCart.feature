@@ -15,4 +15,4 @@ Feature: Using shopping cart feature in Luma Shop
     And user clicks on "Green" color
     And user inputs 2 into Qty field
     And user clicks Add to Cart button
-    Then add to cart success message with "You added Layla Tee to your shopping cart." text should be visible
+    Then product page success message with "You added Layla Tee to your shopping cart." text should be visible

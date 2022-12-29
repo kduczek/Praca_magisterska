@@ -34,9 +34,11 @@ public class ProductPageSteps {
         productPage.clickElement(productPage.getAddToCartButton());
     }
 
-    @Then("add to cart success message with {string} text should be visible")
-    public void verifyVisibilityOfCartMessage(String message) {
-        Assert.assertEquals(productPage.getText(productPage.getAddedToCartMessage()), message, "Wrong message");
+    @Then("product page success/failure message with {string} text should be visible")
+    public void verifyVisibilityOfMessagePrompt(String message) {
+        productPage.waitForPageToLoad();
+        productPage.waitForElementIsVisible(productPage.getProductPageMessagePrompt(), 5, 500);
+        Assert.assertEquals(productPage.getText(productPage.getProductPageMessagePrompt()), message, "Wrong message");
     }
 
     @Then("validation message \"This is a required field.\" should be visible")
@@ -52,5 +54,10 @@ public class ProductPageSteps {
     @Then("quantity error message with {string} text should be visible")
     public void verifyQuantityMessage(String message) {
         Assert.assertEquals(productPage.getText(productPage.getQuantityError()), message, "Error message was different");
+    }
+
+    @When("user clicks Add to wish list button")
+    public void clickAddToWishList() {
+        productPage.clickElement(productPage.getAddToWishListButton());
     }
 }

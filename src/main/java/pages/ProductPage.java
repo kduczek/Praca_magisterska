@@ -9,7 +9,8 @@ public class ProductPage extends BasePage{
     private final By addToCartButton = By.xpath("//button[@title='Add to Cart']");
     private final By requiredFieldError = By.xpath("//div[@class='mage-error']");
     private final By quantityError = By.xpath("//div[@id='qty-error']");
-    private final By addedToCartMessage = By.xpath("//div[@class='messages']");
+    private final By productPageMessagePrompt = By.xpath("//div[@class='messages']");
+    private final By addToWishListButton = By.xpath("//a[@data-action='add-to-wishlist']");
 
     public By getSizeButton(String size) {
         return By.xpath(sizeButton.replace("[SIZE]", size));
@@ -35,7 +36,11 @@ public class ProductPage extends BasePage{
         return quantityError;
     }
 
-    public By getAddedToCartMessage() {
-        return addedToCartMessage;
+    public By getProductPageMessagePrompt() {
+        return productPageMessagePrompt;
+    }
+
+    public By getAddToWishListButton() {
+        return addToWishListButton;
     }
 }

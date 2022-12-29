@@ -23,3 +23,14 @@ Feature: Product page in Luma Shop
     When user clears Qty field
     And user clicks Add to Cart button
     Then quantity error message with "Please enter a valid number in this field." text should be visible
+
+  @Searching @ProductPage
+  Scenario: Verify validation message when not logged user add product to wishlist
+  https://magisterka.atlassian.net/browse/PRAC-20
+
+    When user searches for "LAYLA"
+    Then search results indicator should be equal to "1 Item"
+    And number of elements on page should be equal to 1
+    When user clicks on "Layla Tee" product link
+    And user clicks Add to wish list button
+    Then product page failure message with "You must login or register to add items to your wishlist." text should be visible
