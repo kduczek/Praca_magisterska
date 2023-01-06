@@ -47,5 +47,13 @@ Feature: Using search feature in Luma Shop
     And search results indicator should be equal to "Items 25-26 of 26"
     And number of elements on page should be equal to 2
 
-    #TODO zrobic sortowanie, ale do tego trzeba sprawnej paginacji
+  @Searching
+  Scenario: Search for phrase and change sorting by Product Name
+  https://magisterka.atlassian.net/browse/PRAC-26
+
+    When user searches for "Jacket"
+    And user sorts by "Product Name"
+    Then product names should be sorted in "descending" order
+    When user changes sorting order
+    Then product names should be sorted in "ascending" order
 

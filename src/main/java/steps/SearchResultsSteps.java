@@ -64,4 +64,19 @@ public class SearchResultsSteps {
     public void clickProductLink(String productName) {
         searchResultsPage.clickElement(searchResultsPage.getProductLinkByName(productName));
     }
+
+    @When("user sorts by {string}")
+    public void sortBy(String sort) throws InterruptedException {
+        searchResultsPage.selectFromDropdownByVisibleText(searchResultsPage.getSortByDropdown(), sort);
+    }
+
+    @Then("product names should be sorted in {string} order")
+    public void verifySortingResults(String order) {
+        Assert.assertTrue(searchResultsPage.areElementsSortedByName(order), "Wrong sorting order");
+    }
+
+    @When("user changes sorting order")
+    public void changeSortingOrder() {
+        searchResultsPage.clickElementJS(searchResultsPage.getSortingOrderSwitch());
+    }
 }
