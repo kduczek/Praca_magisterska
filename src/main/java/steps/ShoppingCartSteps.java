@@ -55,4 +55,19 @@ public class ShoppingCartSteps {
     public void clickUpdateButton() {
         topMenuPage.clickElement(topMenuPage.getUpdateQuantityButton());
     }
+
+    @When("user clicks See Detail pane in Cart")
+    public void clickSeeDetails() {
+        topMenuPage.clickElement(topMenuPage.getSeeDetailsSpan());
+    }
+
+    @Then("size in expanded details should be {string}")
+    public void verifySize(String expectedSize) {
+        Assert.assertEquals(topMenuPage.getText(topMenuPage.getDetailsSize()), expectedSize, "Wrong size");
+    }
+
+    @Then("color in expanded details should be {string}")
+    public void verifyColor(String expectedColor) {
+        Assert.assertEquals(topMenuPage.getText(topMenuPage.getDetailsColor()), expectedColor, "Wrong color");
+    }
 }

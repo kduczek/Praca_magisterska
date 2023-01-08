@@ -19,6 +19,9 @@ public class TopMenuPage extends BasePage {
     private final By shoppingCartSubtotal = By.xpath("//div[@class='subtotal']//span[@class='price-wrapper']");
     private final By cartItemQuantityInput = By.xpath("//input[contains(@class, 'cart-item-qty')]");
     private final By updateQuantityButton = By.xpath("//span[normalize-space(.)='Update']");
+    private final By seeDetailsSpan = By.xpath("//span[@data-role='title' and @class='toggle']");
+    private final By detailsSize = By.xpath("//dt[normalize-space(.)='Size']/following-sibling::dd[1]");
+    private final By detailsColor = By.xpath("//dt[normalize-space(.)='Color']/following-sibling::dd[last()]");
 
     //GREETINGS MESSAGE DROPDOWN
     private final By customerMenuArrow = By.xpath("//button[@data-action='customer-menu-toggle']");
@@ -42,12 +45,6 @@ public class TopMenuPage extends BasePage {
 
     public By getCustomerMenuArrow() {
         return customerMenuArrow;
-    }
-
-    public void searchForItem(String item) {
-        clearInput(searchInput);
-        inputValue(searchInput, item);
-        sendKey(searchInput, Keys.ENTER);
     }
 
     public By getShoppingCartIcon() {
@@ -84,6 +81,24 @@ public class TopMenuPage extends BasePage {
 
     public By getUpdateQuantityButton() {
         return updateQuantityButton;
+    }
+
+    public By getSeeDetailsSpan() {
+        return seeDetailsSpan;
+    }
+
+    public By getDetailsSize() {
+        return detailsSize;
+    }
+
+    public By getDetailsColor() {
+        return detailsColor;
+    }
+
+    public void searchForItem(String item) {
+        clearInput(searchInput);
+        inputValue(searchInput, item);
+        sendKey(searchInput, Keys.ENTER);
     }
 
     public void changeQuantityInCart(int newQuantity) {
