@@ -57,3 +57,12 @@ Feature: Using search feature in Luma Shop
     When user changes sorting order
     Then product names should be sorted in "ascending" order
 
+  @Searching
+  Scenario: Search for phrase and change sorting by Price
+  https://magisterka.atlassian.net/browse/PRAC-28
+
+    When user searches for "Jacket"
+    And user sorts by "Price"
+    Then prices should be sorted in "descending" order
+    When user changes sorting order
+    Then prices should be sorted in "ascending" order

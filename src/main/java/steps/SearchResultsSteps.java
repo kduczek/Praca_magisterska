@@ -72,7 +72,12 @@ public class SearchResultsSteps {
 
     @Then("product names should be sorted in {string} order")
     public void verifySortingResults(String order) {
-        Assert.assertTrue(searchResultsPage.areElementsSortedByName(order), "Wrong sorting order");
+        Assert.assertTrue(searchResultsPage.areElementsSortedByName(order), "Wrong Name sorting order");
+    }
+
+    @Then("prices should be sorted in {string} order")
+    public void verifyPriceSortingResults(String order) {
+        Assert.assertTrue(searchResultsPage.areElementsSortedByPrice(order), "Wrong Price sorting order");
     }
 
     @When("user changes sorting order")

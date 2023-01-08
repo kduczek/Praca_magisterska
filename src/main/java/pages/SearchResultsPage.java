@@ -20,6 +20,7 @@ public class SearchResultsPage extends BasePage {
     private final String productLinkByName = "//strong[contains(@class, 'product-item-name')]//a[normalize-space(.)='[NAME]']";
     private final By sortByDropdown = By.xpath("//select[@id='sorter']");
     private final By productName = By.xpath("//a[@class='product-item-link']");
+    private final By productPrice = By.xpath("//span[@data-price-type='finalPrice']");
     private final By sortingOrderSwitch = By.xpath("//a[@data-role='direction-switcher']");
 
     public By getNumberOfElements() {
@@ -84,5 +85,23 @@ public class SearchResultsPage extends BasePage {
 
     public By getSortingOrderSwitch() {
         return sortingOrderSwitch;
+    }
+
+    public boolean areElementsSortedByPrice(String order) {
+        List<WebElement> elements = DriverProvider.getDriver().findElements(productPrice);
+        List<Double> prices = new ArrayList<>();
+
+        for(WebElement singleElement : elements) {
+            String temp = singleElement.getText();
+            temp = temp.substring(1);
+            prices.add(Double.valueOf(temp));
+        }
+
+        List<Double> sortedList = new ArrayList<>(prices);
+        Collections.sort(prices);
+        if(order.equals("descending"))
+            Collections.reverse(sortedList);
+        
+        return sortedList.equals(prices);
     }
 }
