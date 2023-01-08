@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +27,7 @@ public class SearchResultsPage extends BasePage {
     private final By selectedGrid = By.xpath("//strong[@title='Grid']");
     private final By notSelectedList = By.xpath("//a[@title='List']");
     private final By notSelectedGrid = By.xpath("//a[@title='Grid']");
+    private final By relatedSearchTerms = By.xpath("//dl/dt[normalize-space(.)='Related search terms']/../dd");
 
     public By getNumberOfElements() {
         return numberOfElements;
@@ -122,5 +124,14 @@ public class SearchResultsPage extends BasePage {
             clickElement(notSelectedList);
         else
             clickElement(notSelectedGrid);
+    }
+
+    public void verifyRelatedSearchTerms(String keyword) {
+        List<WebElement> elements = DriverProvider.getDriver().findElements(relatedSearchTerms);
+        List<String> relatedSearchTermsList = getTextFromAllItems(elements);
+
+        for(String singleSearchTerm : relatedSearchTermsList) {
+            Assert.assertTrue(singleSearchTerm.toLowerCase().contains(keyword.toLowerCase()), "Related Search Term " + singleSearchTerm + " doesn't contained keyword");
+        }
     }
 }

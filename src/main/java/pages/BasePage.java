@@ -4,6 +4,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
 import static pages.DriverProvider.getDriver;
@@ -115,5 +117,15 @@ public class BasePage {
                 }
             }
         });
+    }
+
+    public List<String> getTextFromAllItems(List<WebElement> elements) {
+        List<String> result = new ArrayList<>();
+
+        for(WebElement singleElement : elements) {
+            result.add(singleElement.getText());
+        }
+
+        return result;
     }
 }

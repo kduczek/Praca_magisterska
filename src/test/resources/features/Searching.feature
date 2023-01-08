@@ -77,3 +77,10 @@ Feature: Using search feature in Luma Shop
     When user changes displaying style to "List"
     Then displaying style should be set to List
     And search results indicator should be equal to "Items 1-10 of 23"
+
+  @Searching
+  Scenario: Search for phrase and verify Related search terms
+  https://magisterka.atlassian.net/browse/PRAC-32
+
+    When user searches for "Jacket"
+    Then all Related Search Terms should contain "jacket" word

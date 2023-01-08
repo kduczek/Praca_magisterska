@@ -99,4 +99,9 @@ public class SearchResultsSteps {
     public void verifyIfDisplayingStyleIsSetToGrid() {
         Assert.assertTrue(searchResultsPage.isElementVisible(searchResultsPage.getSelectedGrid()), "Displaying style wasn't set to Grid");
     }
+
+    @Then("all Related Search Terms should contain {string} word")
+    public void verifyRelatedSearchTerms(String keyword) {
+        searchResultsPage.verifyRelatedSearchTerms(keyword);
+    }
 }
