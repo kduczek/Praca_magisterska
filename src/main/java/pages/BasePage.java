@@ -40,6 +40,11 @@ public class BasePage {
         Thread.sleep(500);
     }
 
+    public void scrollToTheBottomOfPage() {
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)", "");
+    }
+
     public void selectFromDropdownByValue(By element, String value) throws InterruptedException {
         scrollElementIntoView(element);
         Select dropdown = new Select(getDriver().findElement(element));

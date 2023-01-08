@@ -12,22 +12,26 @@ public class SearchResultsPage extends BasePage {
     private final By numberOfElements = By.xpath("//p[@class='toolbar-amount']");
     private final By noResultsFoundWarning = By.xpath("//div[normalize-space(.)='Your search returned no results.']");
     private final By productContainer = By.xpath("//span[@class='product-image-container']");
+    private final String productLinkByName = "//strong[contains(@class, 'product-item-name')]//a[normalize-space(.)='[NAME]']";
+    private final By sortByDropdown = By.xpath("//select[@id='sorter']");
+    private final By productName = By.xpath("//a[@class='product-item-link']");
+    private final By productPrice = By.xpath("//span[@data-price-type='finalPrice']");
+    private final By sortingOrderSwitch = By.xpath("//a[@data-role='direction-switcher']");
+    private final By relatedSearchTerms = By.xpath("//dl/dt[normalize-space(.)='Related search terms']/../dd");
+
+    //PAGINATION
     private final By paginationDropdown = By.xpath("//select[@id='limiter']");
     private final String paginationOption = "//option[@value='[VALUE]']";
     private final String pageLink = "//ul[contains(@class, 'pages-items')]//a//span[normalize-space(.)='[PAGE_NUMBER]']";
     private final By previousPageArrow = By.xpath("//a[@title='Previous']");
     private final By nextPageArrow = By.xpath("//a[@title='Next']");
     private final By currentPageNumber = By.xpath("//span[contains(text(), 'currently reading page')]/following-sibling::span");
-    private final String productLinkByName = "//strong[contains(@class, 'product-item-name')]//a[normalize-space(.)='[NAME]']";
-    private final By sortByDropdown = By.xpath("//select[@id='sorter']");
-    private final By productName = By.xpath("//a[@class='product-item-link']");
-    private final By productPrice = By.xpath("//span[@data-price-type='finalPrice']");
-    private final By sortingOrderSwitch = By.xpath("//a[@data-role='direction-switcher']");
+
+    //DISPLAY STYLE
     private final By selectedList = By.xpath("//strong[@title='List']");
     private final By selectedGrid = By.xpath("//strong[@title='Grid']");
     private final By notSelectedList = By.xpath("//a[@title='List']");
     private final By notSelectedGrid = By.xpath("//a[@title='Grid']");
-    private final By relatedSearchTerms = By.xpath("//dl/dt[normalize-space(.)='Related search terms']/../dd");
 
     public By getNumberOfElements() {
         return numberOfElements;
@@ -87,11 +91,7 @@ public class SearchResultsPage extends BasePage {
 
     public boolean areElementsSortedByName(String order) {
         List<WebElement> elements = DriverProvider.getDriver().findElements(productName);
-        List<String> productNames = new ArrayList<>();
-
-        for(WebElement singleElement : elements) {
-            productNames.add(singleElement.getText());
-        }
+        List<String> productNames = getTextFromAllItems(elements);
 
         List<String> sortedList = new ArrayList<>(productNames);
         Collections.sort(productNames);
