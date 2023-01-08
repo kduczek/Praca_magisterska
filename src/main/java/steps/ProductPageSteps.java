@@ -114,4 +114,9 @@ public class ProductPageSteps {
     public void allowToDeleteFromCart() {
         topMenuPage.clickElement(topMenuPage.getAllowDeletingFromCart());
     }
+
+    @When("user declines deleting item from cart")
+    public void declineToDeleteFromCart() {
+        topMenuPage.clickElement(topMenuPage.getCancelDeletingFromCart());
+    }
 }
