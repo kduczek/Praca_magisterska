@@ -16,6 +16,7 @@ Feature: Using shopping cart feature in Luma Shop
     And user inputs 2 into Qty field
     And user clicks Add to Cart button
     Then product page success message with "You added Layla Tee to your shopping cart." text should be visible
+    And number of products in cart should be equal to 2
 
   @Searching @ShoppingCart @ProductPage
   Scenario: Search for a product, add it to the cart and then remove
