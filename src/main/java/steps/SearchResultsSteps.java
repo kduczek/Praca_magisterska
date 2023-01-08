@@ -84,4 +84,19 @@ public class SearchResultsSteps {
     public void changeSortingOrder() {
         searchResultsPage.clickElementJS(searchResultsPage.getSortingOrderSwitch());
     }
+
+    @When("user changes displaying style to {string}")
+    public void changeDisplayingStyle(String styleName) {
+        searchResultsPage.selectDisplayingStyle(styleName);
+    }
+
+    @Then("displaying style should be set to List")
+    public void verifyIfDisplayingStyleIsSetToList() {
+        Assert.assertTrue(searchResultsPage.isElementVisible(searchResultsPage.getSelectedList()), "Displaying style wasn't set to List");
+    }
+
+    @Then("displaying style should be set to Grid")
+    public void verifyIfDisplayingStyleIsSetToGrid() {
+        Assert.assertTrue(searchResultsPage.isElementVisible(searchResultsPage.getSelectedGrid()), "Displaying style wasn't set to Grid");
+    }
 }

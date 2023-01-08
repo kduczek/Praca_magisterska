@@ -66,3 +66,14 @@ Feature: Using search feature in Luma Shop
     Then prices should be sorted in "descending" order
     When user changes sorting order
     Then prices should be sorted in "ascending" order
+
+  @Searching
+  Scenario: Search for phrase and change displaying style
+  https://magisterka.atlassian.net/browse/PRAC-30
+
+    When user searches for "Jacket"
+    Then displaying style should be set to Grid
+    And search results indicator should be equal to "Items 1-12 of 23"
+    When user changes displaying style to "List"
+    Then displaying style should be set to List
+    And search results indicator should be equal to "Items 1-10 of 23"

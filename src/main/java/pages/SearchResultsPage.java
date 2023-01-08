@@ -22,6 +22,10 @@ public class SearchResultsPage extends BasePage {
     private final By productName = By.xpath("//a[@class='product-item-link']");
     private final By productPrice = By.xpath("//span[@data-price-type='finalPrice']");
     private final By sortingOrderSwitch = By.xpath("//a[@data-role='direction-switcher']");
+    private final By selectedList = By.xpath("//strong[@title='List']");
+    private final By selectedGrid = By.xpath("//strong[@title='Grid']");
+    private final By notSelectedList = By.xpath("//a[@title='List']");
+    private final By notSelectedGrid = By.xpath("//a[@title='Grid']");
 
     public By getNumberOfElements() {
         return numberOfElements;
@@ -67,6 +71,18 @@ public class SearchResultsPage extends BasePage {
         return sortByDropdown;
     }
 
+    public By getSortingOrderSwitch() {
+        return sortingOrderSwitch;
+    }
+
+    public By getSelectedList() {
+        return selectedList;
+    }
+
+    public By getSelectedGrid() {
+        return selectedGrid;
+    }
+
     public boolean areElementsSortedByName(String order) {
         List<WebElement> elements = DriverProvider.getDriver().findElements(productName);
         List<String> productNames = new ArrayList<>();
@@ -81,10 +97,6 @@ public class SearchResultsPage extends BasePage {
             Collections.reverse(sortedList);
 
         return sortedList.equals(productNames);
-    }
-
-    public By getSortingOrderSwitch() {
-        return sortingOrderSwitch;
     }
 
     public boolean areElementsSortedByPrice(String order) {
@@ -103,5 +115,12 @@ public class SearchResultsPage extends BasePage {
             Collections.reverse(sortedList);
         
         return sortedList.equals(prices);
+    }
+
+    public void selectDisplayingStyle(String styleName) {
+        if (styleName.equalsIgnoreCase("list"))
+            clickElement(notSelectedList);
+        else
+            clickElement(notSelectedGrid);
     }
 }
