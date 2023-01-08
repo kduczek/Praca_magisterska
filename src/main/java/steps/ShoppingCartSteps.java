@@ -45,4 +45,14 @@ public class ShoppingCartSteps {
     public void verifyCartSubtotal(String expectedAmount) {
         Assert.assertEquals(topMenuPage.getText(topMenuPage.getShoppingCartSubtotal()), expectedAmount, "Wrong Cart Subtotal");
     }
+
+    @When("user sets Quantity in shopping cart to {int}")
+    public void setQuantityInCart(int newQuantity) {
+        topMenuPage.changeQuantityInCart(newQuantity);
+    }
+
+    @When("user clicks Update button in cart")
+    public void clickUpdateButton() {
+        topMenuPage.clickElement(topMenuPage.getUpdateQuantityButton());
+    }
 }

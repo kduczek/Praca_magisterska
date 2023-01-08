@@ -17,6 +17,8 @@ public class TopMenuPage extends BasePage {
     private final By allowDeletingFromCart = By.xpath("//button[normalize-space(.)='OK']");
     private final By emptyCartMessage = By.xpath("//strong[@class='subtitle empty']");
     private final By shoppingCartSubtotal = By.xpath("//div[@class='subtotal']//span[@class='price-wrapper']");
+    private final By cartItemQuantityInput = By.xpath("//input[contains(@class, 'cart-item-qty')]");
+    private final By updateQuantityButton = By.xpath("//span[normalize-space(.)='Update']");
 
     //GREETINGS MESSAGE DROPDOWN
     private final By customerMenuArrow = By.xpath("//button[@data-action='customer-menu-toggle']");
@@ -74,5 +76,18 @@ public class TopMenuPage extends BasePage {
 
     public By getShoppingCartSubtotal() {
         return shoppingCartSubtotal;
+    }
+
+    public By getCartItemQuantityInput() {
+        return cartItemQuantityInput;
+    }
+
+    public By getUpdateQuantityButton() {
+        return updateQuantityButton;
+    }
+
+    public void changeQuantityInCart(int newQuantity) {
+        sendKey(getCartItemQuantityInput(), Keys.BACK_SPACE);
+        inputValue(getCartItemQuantityInput(), String.valueOf(newQuantity));
     }
 }
