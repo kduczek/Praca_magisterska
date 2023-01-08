@@ -16,6 +16,7 @@ public class TopMenuPage extends BasePage {
     private final By cancelDeletingFromCart = By.xpath("//button[normalize-space(.)='Cancel']");
     private final By allowDeletingFromCart = By.xpath("//button[normalize-space(.)='OK']");
     private final By emptyCartMessage = By.xpath("//strong[@class='subtitle empty']");
+    private final By shoppingCartSubtotal = By.xpath("//div[@class='subtotal']//span[@class='price-wrapper']");
 
     //GREETINGS MESSAGE DROPDOWN
     private final By customerMenuArrow = By.xpath("//button[@data-action='customer-menu-toggle']");
@@ -69,5 +70,9 @@ public class TopMenuPage extends BasePage {
 
     public By getEmptyCartMessage() {
         return emptyCartMessage;
+    }
+
+    public By getShoppingCartSubtotal() {
+        return shoppingCartSubtotal;
     }
 }

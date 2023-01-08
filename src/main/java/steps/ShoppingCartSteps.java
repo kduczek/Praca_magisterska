@@ -41,4 +41,8 @@ public class ShoppingCartSteps {
         Assert.assertTrue(topMenuPage.isElementVisible(topMenuPage.getEmptyCartMessage()));
     }
 
+    @Then("Cart Subtotal should be equal to {string}")
+    public void verifyCartSubtotal(String expectedAmount) {
+        Assert.assertEquals(topMenuPage.getText(topMenuPage.getShoppingCartSubtotal()), expectedAmount, "Wrong Cart Subtotal");
+    }
 }
