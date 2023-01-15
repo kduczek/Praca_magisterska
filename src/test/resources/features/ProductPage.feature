@@ -61,3 +61,13 @@ Feature: Product page in Luma Shop
       | Test user | My Summary | This is a nice T-Shirt |
     And user clicks Submit Review button
     Then product page success message with "You submitted your review for moderation." text should be visible
+
+  @Searching @ProductPage
+  Scenario: Verify the product without any review
+  https://magisterka.atlassian.net/browse/PRAC-44
+
+    When user searches for "Phoebe Zipper Sweatshirt"
+    Then search results indicator should be equal to "Items 1-12 of 30"
+    And number of elements on page should be equal to 12
+    When user clicks on "Phoebe Zipper Sweatshirt" product link
+    Then "Be the first to review this product" message should be visible

@@ -86,4 +86,9 @@ public class ProductPageSteps {
     public void clickSubmitReviewButton() {
         productPage.clickElement(productPage.getSubmitReviewButton());
     }
+
+    @Then("\"Be the first to review this product\" message should be visible")
+    public void verifyNoReviewMessage() {
+        Assert.assertTrue(productPage.isElementVisible(productPage.getNoReviewsInfo()), "Message wasn't visible");
+    }
 }

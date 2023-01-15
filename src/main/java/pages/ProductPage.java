@@ -23,6 +23,7 @@ public class ProductPage extends BasePage{
     private final By summaryInput = By.xpath("//input[@name='title']");
     private final By reviewInput = By.xpath("//textarea[@name='detail']");
     private final By submitReviewButton = By.xpath("//button[normalize-space(.)='Submit Review']");
+    private final By noReviewsInfo = By.xpath("//div[@class='reviews-actions']//a[contains(text(), 'Be the first')]");
 
 
     public By getSizeButton(String size) {
@@ -83,6 +84,10 @@ public class ProductPage extends BasePage{
 
     public By getSubmitReviewButton() {
         return submitReviewButton;
+    }
+
+    public By getNoReviewsInfo() {
+        return noReviewsInfo;
     }
 
     public void fillReviewFields(DataTable dataTable) {
