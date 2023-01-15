@@ -26,3 +26,12 @@ Feature: Login to Luma Shop Application
     When user waits 6 seconds
     Then "You are signed out" header should not be visible
     And default greetings message should be visible in Top Menu
+
+  @Login
+  Scenario: Verify validation of fields in Login Page
+  https://magisterka.atlassian.net/browse/PRAC-46
+
+    When user clicks on Sign In button from Top Menu
+    And user clicks on Sign In button
+    Then validation for empty email should be visible
+    And validation for empty password should be visible
