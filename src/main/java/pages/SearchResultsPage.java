@@ -18,6 +18,8 @@ public class SearchResultsPage extends BasePage {
     private final By productPrice = By.xpath("//span[@data-price-type='finalPrice']");
     private final By sortingOrderSwitch = By.xpath("//a[@data-role='direction-switcher']");
     private final By relatedSearchTerms = By.xpath("//dl/dt[normalize-space(.)='Related search terms']/../dd");
+    private final String shoppingOption = "//div[normalize-space(.)='[OPTION]']";
+    private final String priceFilter = "//div[@class='filter-options-content']//a/span[contains(text(), '[PRICE]')]";
 
     //PAGINATION
     private final By paginationDropdown = By.xpath("//select[@id='limiter']");
@@ -89,13 +91,21 @@ public class SearchResultsPage extends BasePage {
         return selectedGrid;
     }
 
+    public By getShoppingOption(String option) {
+        return By.xpath(shoppingOption.replace("[OPTION]", option));
+    }
+
+    public By getPriceOption(String startingPrice) {
+        return By.xpath(priceFilter.replace("[PRICE]", startingPrice));
+    }
+
     public boolean areElementsSortedByName(String order) {
         List<WebElement> elements = DriverProvider.getDriver().findElements(productName);
         List<String> productNames = getTextFromAllItems(elements);
 
         List<String> sortedList = new ArrayList<>(productNames);
         Collections.sort(productNames);
-        if(order.equals("descending"))
+        if (order.equals("descending"))
             Collections.reverse(sortedList);
 
         return sortedList.equals(productNames);
@@ -105,7 +115,7 @@ public class SearchResultsPage extends BasePage {
         List<WebElement> elements = DriverProvider.getDriver().findElements(productPrice);
         List<Double> prices = new ArrayList<>();
 
-        for(WebElement singleElement : elements) {
+        for (WebElement singleElement : elements) {
             String temp = singleElement.getText();
             temp = temp.substring(1);
             prices.add(Double.valueOf(temp));
@@ -113,9 +123,9 @@ public class SearchResultsPage extends BasePage {
 
         List<Double> sortedList = new ArrayList<>(prices);
         Collections.sort(prices);
-        if(order.equals("descending"))
+        if (order.equals("descending"))
             Collections.reverse(sortedList);
-        
+
         return sortedList.equals(prices);
     }
 
@@ -130,8 +140,26 @@ public class SearchResultsPage extends BasePage {
         List<WebElement> elements = DriverProvider.getDriver().findElements(relatedSearchTerms);
         List<String> relatedSearchTermsList = getTextFromAllItems(elements);
 
-        for(String singleSearchTerm : relatedSearchTermsList) {
+        for (String singleSearchTerm : relatedSearchTermsList) {
             Assert.assertTrue(singleSearchTerm.toLowerCase().contains(keyword.toLowerCase()), "Related Search Term " + singleSearchTerm + " doesn't contained keyword");
         }
+    }
+
+    public boolean verifyPricesRange(double startingPrice, double endPrice) {
+        List<WebElement> elements = DriverProvider.getDriver().findElements(productPrice);
+        List<Double> prices = new ArrayList<>();
+
+        for (WebElement singleElement : elements) {
+            String temp = singleElement.getText();
+            temp = temp.substring(1);
+            prices.add(Double.valueOf(temp));
+        }
+
+        for (double value : prices) {
+            if (value < startingPrice || value > endPrice)
+                    return false;
+        }
+
+        return true;
     }
 }

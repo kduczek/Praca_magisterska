@@ -84,3 +84,13 @@ Feature: Using search feature in Luma Shop
 
     When user searches for "Jacket"
     Then all Related Search Terms should contain "jacket" word
+
+  @Searching
+  Scenario: Open new collection page and verify filtering by price
+  https://magisterka.atlassian.net/browse/PRAC-48
+
+    When user clicks Shop New Yoga button
+    And user expands shopping option named "Price"
+    And user selects price filter option with following starting price "$50.00"
+    Then search results indicator should be equal to "7 Items"
+    And all products prices should be between 50.00 and 59.99

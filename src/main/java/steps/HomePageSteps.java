@@ -53,4 +53,9 @@ public class HomePageSteps {
     public void searchFor(String item) {
         topMenuPage.searchForItem(item);
     }
+
+    @When("user clicks Shop New Yoga button")
+    public void clickShopNewYogaButton() {
+        homePage.clickElement(homePage.getShopNewYogaButton());
+    }
 }

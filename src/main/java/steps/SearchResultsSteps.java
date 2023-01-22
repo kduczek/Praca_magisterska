@@ -104,4 +104,19 @@ public class SearchResultsSteps {
     public void verifyRelatedSearchTerms(String keyword) {
         searchResultsPage.verifyRelatedSearchTerms(keyword);
     }
+
+    @When("user expands shopping option named {string}")
+    public void expandShoppingOption(String option) {
+        searchResultsPage.clickElement(searchResultsPage.getShoppingOption(option));
+    }
+
+    @When("user selects price filter option with following starting price {string}")
+    public void clickPriceFilter(String startingPrice) {
+        searchResultsPage.clickElement(searchResultsPage.getPriceOption(startingPrice));
+    }
+
+    @Then("all products prices should be between {double} and {double}")
+    public void verifyProductsPriceRange(double startingPrice, double endPrice) {
+        searchResultsPage.verifyPricesRange(startingPrice, endPrice);
+    }
 }
