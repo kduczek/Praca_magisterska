@@ -18,8 +18,13 @@ public class SearchResultsPage extends BasePage {
     private final By productPrice = By.xpath("//span[@data-price-type='finalPrice']");
     private final By sortingOrderSwitch = By.xpath("//a[@data-role='direction-switcher']");
     private final By relatedSearchTerms = By.xpath("//dl/dt[normalize-space(.)='Related search terms']/../dd");
+
+   //FILTERING
     private final String shoppingOption = "//div[normalize-space(.)='[OPTION]']";
     private final String priceFilter = "//div[@class='filter-options-content']//a/span[contains(text(), '[PRICE]')]";
+    private final By clearAllFiltersButton = By.xpath("//span[normalize-space(.)='Clear All']");
+    private final By activeFilterValue = By.xpath("//div[@class='filter-current']//span[last()]");
+    private final By activeFilterName = By.xpath("//div[@class='filter-current']//span");
 
     //PAGINATION
     private final By paginationDropdown = By.xpath("//select[@id='limiter']");
@@ -97,6 +102,18 @@ public class SearchResultsPage extends BasePage {
 
     public By getPriceOption(String startingPrice) {
         return By.xpath(priceFilter.replace("[PRICE]", startingPrice));
+    }
+
+    public By getClearAllFiltersButton() {
+        return clearAllFiltersButton;
+    }
+
+    public By getActiveFilterValue() {
+        return activeFilterValue;
+    }
+
+    public By getActiveFilterName() {
+        return activeFilterName;
     }
 
     public boolean areElementsSortedByName(String order) {

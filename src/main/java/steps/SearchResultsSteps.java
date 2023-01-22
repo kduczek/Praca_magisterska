@@ -117,6 +117,27 @@ public class SearchResultsSteps {
 
     @Then("all products prices should be between {double} and {double}")
     public void verifyProductsPriceRange(double startingPrice, double endPrice) {
-        searchResultsPage.verifyPricesRange(startingPrice, endPrice);
+        Assert.assertTrue(searchResultsPage.verifyPricesRange(startingPrice, endPrice), "Wrong sorting by Price");
+    }
+
+    @Then("current filter should be equal to {string} and value to {string}")
+    public void verifyCurrentFilter(String filterName, String filterValue) {
+        Assert.assertEquals(searchResultsPage.getText(searchResultsPage.getActiveFilterName()), filterName, "Wrong current filter name");
+        Assert.assertEquals(searchResultsPage.getText(searchResultsPage.getActiveFilterValue()), filterValue, "Wrong current filter value");
+    }
+
+    @Then("Clear All filters button should be visible")
+    public void verifyIfClearAllButtonIsVisible() {
+        Assert.assertTrue(searchResultsPage.isElementVisible(searchResultsPage.getClearAllFiltersButton()), "Clear All wasn't visible");
+    }
+
+    @Then("Clear All filters button should not be visible")
+    public void verifyIfClearAllButtonIsInvisible() {
+        Assert.assertFalse(searchResultsPage.isElementVisible(searchResultsPage.getClearAllFiltersButton()), "Clear All was visible");
+    }
+
+    @When("user clicks Clear All filters button")
+    public void clickClearAllButton() {
+        searchResultsPage.clickElement(searchResultsPage.getClearAllFiltersButton());
     }
 }
