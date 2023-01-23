@@ -104,6 +104,24 @@ Feature: Using search feature in Luma Shop
     When user expands shopping option named "Price"
     And user selects price filter option with following starting price "$40.00"
     Then Clear All filters button should be visible
-    And current filter should be equal to "Price" and value to "$40.00 - $49.99"
+    And all active filters should be equal to following
+      | Price      | $40.00 - $49.99 |
     When user clicks Clear All filters button
     Then Clear All filters button should not be visible
+
+  @Searching
+  Scenario: Verify if user is able to use more than one filter
+  https://magisterka.atlassian.net/browse/PRAC-52
+
+    When user clicks Shop New Yoga button
+    Then Clear All filters button should not be visible
+    When user expands shopping option named "Price"
+    And user selects price filter option with following starting price "$40.00"
+    Then Clear All filters button should be visible
+    And all active filters should be equal to following
+      | Price      | $40.00 - $49.99 |
+    When user expands shopping option named "Activity"
+    And user selects filter option named "Travel"
+    Then all active filters should be equal to following
+      | Price      | $40.00 - $49.99 |
+      | Activity   | Travel          |

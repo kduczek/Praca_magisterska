@@ -1,12 +1,11 @@
 package pages;
 
+import io.cucumber.datatable.DataTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class SearchResultsPage extends BasePage {
     private final By numberOfElements = By.xpath("//p[@class='toolbar-amount']");
@@ -22,9 +21,11 @@ public class SearchResultsPage extends BasePage {
    //FILTERING
     private final String shoppingOption = "//div[normalize-space(.)='[OPTION]']";
     private final String priceFilter = "//div[@class='filter-options-content']//a/span[contains(text(), '[PRICE]')]";
+    private final String generalFilterOption = "//div[@class='filter-options-content']/ol/li/a[contains(text(), '[NAME]')]";
     private final By clearAllFiltersButton = By.xpath("//span[normalize-space(.)='Clear All']");
     private final By activeFilterValue = By.xpath("//div[@class='filter-current']//span[last()]");
     private final By activeFilterName = By.xpath("//div[@class='filter-current']//span");
+    private final By allActiveFilters = By.xpath("//div[@class='filter-current']//ol/li/span");
 
     //PAGINATION
     private final By paginationDropdown = By.xpath("//select[@id='limiter']");
@@ -104,6 +105,10 @@ public class SearchResultsPage extends BasePage {
         return By.xpath(priceFilter.replace("[PRICE]", startingPrice));
     }
 
+    public By getGeneralFilterOption(String filterName) {
+        return By.xpath(generalFilterOption.replace("[NAME]", filterName));
+    }
+
     public By getClearAllFiltersButton() {
         return clearAllFiltersButton;
     }
@@ -178,5 +183,17 @@ public class SearchResultsPage extends BasePage {
         }
 
         return true;
+    }
+
+    public void verifyAllActiveFilters(DataTable dataTable) {
+        List<WebElement> elements = DriverProvider.getDriver().findElements(allActiveFilters);
+        Map<String, String> actualFilters = new HashMap<>();
+        Map<String, String> expectedFiltersAndValues = dataTable.asMap();
+
+        for (int i = 0; i < elements.size(); i += 2) {
+            actualFilters.put(elements.get(i).getText(), elements.get(i + 1).getText());
+        }
+
+        Assert.assertEquals(actualFilters, expectedFiltersAndValues, "Wrong current filters");
     }
 }

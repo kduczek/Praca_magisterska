@@ -2,6 +2,7 @@ package steps;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.datatable.DataTable;
 import org.testng.Assert;
 import pages.SearchResultsPage;
 
@@ -115,15 +116,19 @@ public class SearchResultsSteps {
         searchResultsPage.clickElement(searchResultsPage.getPriceOption(startingPrice));
     }
 
+    @When("user selects filter option named {string}")
+    public void clickFilterByName(String filterName) {
+        searchResultsPage.clickElement(searchResultsPage.getGeneralFilterOption(filterName));
+    }
+
     @Then("all products prices should be between {double} and {double}")
     public void verifyProductsPriceRange(double startingPrice, double endPrice) {
         Assert.assertTrue(searchResultsPage.verifyPricesRange(startingPrice, endPrice), "Wrong sorting by Price");
     }
 
-    @Then("current filter should be equal to {string} and value to {string}")
-    public void verifyCurrentFilter(String filterName, String filterValue) {
-        Assert.assertEquals(searchResultsPage.getText(searchResultsPage.getActiveFilterName()), filterName, "Wrong current filter name");
-        Assert.assertEquals(searchResultsPage.getText(searchResultsPage.getActiveFilterValue()), filterValue, "Wrong current filter value");
+    @Then("all active filters should be equal to following")
+    public void verifyActiveFilters(DataTable dataTable) {
+        searchResultsPage.verifyAllActiveFilters(dataTable);
     }
 
     @Then("Clear All filters button should be visible")
