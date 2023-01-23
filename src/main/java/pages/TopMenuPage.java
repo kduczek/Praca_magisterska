@@ -8,6 +8,7 @@ public class TopMenuPage extends BasePage {
     private final By greetingsSpan = By.xpath("//span[@class='logged-in']");
     private final By defaultGreetingsSpan = By.xpath("//span[@class='not-logged-in']");
     private final By searchInput = By.xpath("//input[@id='search']");
+    private final By createAccountButton = By.xpath("//a[normalize-space()='Create an Account']");
 
     //SHOPPING CART
     private final By shoppingCartIcon = By.xpath("//a[contains(@class, 'showcart')]");
@@ -93,6 +94,10 @@ public class TopMenuPage extends BasePage {
 
     public By getDetailsColor() {
         return detailsColor;
+    }
+
+    public By getCreateAccountButton() {
+        return createAccountButton;
     }
 
     public void searchForItem(String item) {
