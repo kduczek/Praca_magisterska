@@ -35,4 +35,9 @@ public class CreateAccountSteps {
     public void verifyCreateAccountInputs(String visibility) {
         createAccountPage.verifyVisibilityOfValidationForAllInputs(visibility.equals("visible"));
     }
+
+    @Then("confirm password validation should be visible with text {string}")
+    public void verifyValidationOfConfirmPassword(String validationMessage) {
+        Assert.assertEquals(createAccountPage.getText(createAccountPage.getConfirmPasswordValidation()), validationMessage, "Wrong validation message");
+    }
 }

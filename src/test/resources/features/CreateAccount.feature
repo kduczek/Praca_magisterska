@@ -26,3 +26,14 @@ Feature: Create new user in Luma Shop
     Then validation messages for all inputs in Create Account should be "invisible"
     When user clicks Create an Account button
     Then validation messages for all inputs in Create Account should be "visible"
+
+  @Registration
+  Scenario: Verify validation message for Confirm Password input when password don't match
+  https://magisterka.atlassian.net/browse/PRAC-58
+
+    When user clicks Create an Account button from Top Menu
+    And user inputs following details for new user
+      | First Name | Last Name | Email    | Password        | Confirm Password  |
+      | John       | Kowalski  | [RANDOM] | testPassword789 | WRONG_PASSWORD123 |
+    And user clicks Create an Account button
+    Then confirm password validation should be visible with text "Please enter the same value again."

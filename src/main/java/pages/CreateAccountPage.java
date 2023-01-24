@@ -21,7 +21,7 @@ public class CreateAccountPage extends BasePage {
     private final By lastNameRequired = By.xpath("//div[@id='lastname-error']");
     private final By emailRequired = By.xpath("//div[@id='email_address-error']");
     private final By passwordRequired = By.xpath("//div[@id='password-error']");
-    private final By confirmPasswordRequired = By.xpath("//div[@id='password-confirmation-error']");
+    private final By confirmPasswordValidation = By.xpath("//div[@id='password-confirmation-error']");
 
     public By getCreateAnAccountButton() {
         return createAnAccountButton;
@@ -51,6 +51,10 @@ public class CreateAccountPage extends BasePage {
         return registrationConfirmMessage;
     }
 
+    public By getConfirmPasswordValidation() {
+        return confirmPasswordValidation;
+    }
+
     public void createUser(DataTable dataTable) {
         Map<String, String> credentials = dataTable.asMaps().get(0);
 
@@ -76,13 +80,15 @@ public class CreateAccountPage extends BasePage {
                                         isElementVisible(lastNameRequired) &&
                                         isElementVisible(emailRequired) &&
                                         isElementVisible(passwordRequired) &&
-                                        isElementVisible(confirmPasswordRequired));
+                                        isElementVisible(confirmPasswordValidation),
+                                "Validation messages weren't visible");
         } else {
             Assert.assertFalse(isElementVisible(firstNameRequired) &&
                                         isElementVisible(lastNameRequired) &&
                                         isElementVisible(emailRequired) &&
                                         isElementVisible(passwordRequired) &&
-                                        isElementVisible(confirmPasswordRequired));
+                                        isElementVisible(confirmPasswordValidation),
+                                "Validation messages were visible");
         }
     }
 }
