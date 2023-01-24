@@ -13,3 +13,7 @@ Feature: Create new user in Luma Shop
       | John       | Kowalski  | [RANDOM] | testPassword789 | testPassword789  |
     And user clicks Create an Account button
     Then confirmation message after registering new account should be visible
+    And greetings message "Welcome, John Kowalski!" should be visible in Top Menu
+    When user clicks on arrow next to greetings message to open dropdown
+    And user clicks on Sign Out button
+    Then "You are signed out" header should be visible
