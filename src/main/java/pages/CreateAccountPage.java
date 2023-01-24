@@ -14,7 +14,7 @@ public class CreateAccountPage extends BasePage {
     private final By emailNameInput = By.xpath("//input[@id='email_address']");
     private final By passwordNameInput = By.xpath("//input[@id='password']");
     private final By confirmPasswordNameInput = By.xpath("//input[@id='password-confirmation']");
-    private final By registrationConfirmMessage = By.xpath("//div[@class='messages']//div[contains(text(), 'Thank you for registering')]");
+    private final By subscriptionCheckbox = By.xpath("//input[@id='is_subscribed']");
 
     //VALIDATION
     private final By firstNameValidation = By.xpath("//div[@id='firstname-error']");
@@ -48,10 +48,6 @@ public class CreateAccountPage extends BasePage {
         return confirmPasswordNameInput;
     }
 
-    public By getRegistrationConfirmMessage() {
-        return registrationConfirmMessage;
-    }
-
     public By getPasswordValidation() {
         return passwordValidation;
     }
@@ -62,6 +58,10 @@ public class CreateAccountPage extends BasePage {
 
     public By getPasswordStrengthMeter() {
         return passwordStrengthMeter;
+    }
+
+    public By getSubscriptionCheckbox() {
+        return subscriptionCheckbox;
     }
 
     public void createUser(DataTable dataTable) {

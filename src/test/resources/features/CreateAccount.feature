@@ -14,6 +14,7 @@ Feature: Create new user in Luma Shop
     And user clicks Create an Account button
     Then confirmation message after registering new account should be visible
     And greetings message "Welcome, John Kowalski!" should be visible in Top Menu
+    And user should be moved to My Account page
     When user clicks on arrow next to greetings message to open dropdown
     And user clicks on Sign Out button
     Then "You are signed out" header should be visible
@@ -78,3 +79,21 @@ Feature: Create new user in Luma Shop
       | Password              |
       | [SPACE][SPACE][SPACE] |
     Then password validation should be visible with text "This is a required field."
+
+  @Registration
+  Scenario: Register new user and Sign him to the Newsletter
+  https://magisterka.atlassian.net/browse/PRAC-64
+
+    When user clicks Create an Account button from Top Menu
+    And user inputs following details for new user
+      | First Name | Last Name | Email    | Password        | Confirm Password |
+      | John       | Kowalski  | [RANDOM] | testPassword789 | testPassword789  |
+    And user checks Sign Up for Newsletter checkbox
+    And user clicks Create an Account button
+    Then confirmation message after registering new account should be visible
+    And greetings message "Welcome, John Kowalski!" should be visible in Top Menu
+    And user should be moved to My Account page
+    And Newsletter status should be equal to "You are subscribed to \"General Subscription\"."
+    When user clicks on arrow next to greetings message to open dropdown
+    And user clicks on Sign Out button
+    Then "You are signed out" header should be visible
