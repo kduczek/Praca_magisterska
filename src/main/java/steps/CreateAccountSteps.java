@@ -40,4 +40,10 @@ public class CreateAccountSteps {
     public void verifyValidationOfConfirmPassword(String validationMessage) {
         Assert.assertEquals(createAccountPage.getText(createAccountPage.getConfirmPasswordValidation()), validationMessage, "Wrong validation message");
     }
+
+    @Then("Password Strength should be {string}")
+    public void verifyPasswordStrength(String expectedStrength) {
+        String actualStrength = createAccountPage.getText(createAccountPage.getPasswordStrengthMeter()).replace("Password Strength: ", "");
+        Assert.assertEquals(actualStrength, expectedStrength, "Wrong Password Strength message");
+    }
 }

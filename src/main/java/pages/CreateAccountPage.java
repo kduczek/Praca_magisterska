@@ -22,6 +22,7 @@ public class CreateAccountPage extends BasePage {
     private final By emailRequired = By.xpath("//div[@id='email_address-error']");
     private final By passwordRequired = By.xpath("//div[@id='password-error']");
     private final By confirmPasswordValidation = By.xpath("//div[@id='password-confirmation-error']");
+    private final By passwordStrengthMeter = By.xpath("//div[@id='password-strength-meter']");
 
     public By getCreateAnAccountButton() {
         return createAnAccountButton;
@@ -55,23 +56,35 @@ public class CreateAccountPage extends BasePage {
         return confirmPasswordValidation;
     }
 
+    public By getPasswordStrengthMeter() {
+        return passwordStrengthMeter;
+    }
+
     public void createUser(DataTable dataTable) {
         Map<String, String> credentials = dataTable.asMaps().get(0);
 
-        inputValue(firstNameInput, credentials.get("First Name"));
-        inputValue(lastNameInput, credentials.get("Last Name"));
-        if (credentials.get("Email").equals("[RANDOM]")) {
-            Random r = new Random();
-            StringBuilder email = new StringBuilder();
-            for (int i = 0; i < 10; i++)
-                email.append((char) (r.nextInt(26) + 'a'));
-            email.append("@test.pl");
-            inputValue(emailNameInput, email.toString());
-        } else {
-            inputValue(emailNameInput, credentials.get("Email"));
+        if(credentials.get("First Name") != null)
+            inputValue(firstNameInput, credentials.get("First Name"));
+        if(credentials.get("Last Name") != null)
+            inputValue(lastNameInput, credentials.get("Last Name"));
+        if(credentials.get("Email") != null) {
+            if (credentials.get("Email").equals("[RANDOM]")) {
+                Random r = new Random();
+                StringBuilder email = new StringBuilder();
+                for (int i = 0; i < 10; i++)
+                    email.append((char) (r.nextInt(26) + 'a'));
+                email.append("@test.pl");
+                inputValue(emailNameInput, email.toString());
+            } else {
+                inputValue(emailNameInput, credentials.get("Email"));
+            }
         }
-        inputValue(passwordNameInput, credentials.get("Password"));
-        inputValue(confirmPasswordNameInput, credentials.get("Confirm Password"));
+        if(credentials.get("Password") != null) {
+            clearInput(passwordNameInput);
+            inputValue(passwordNameInput, credentials.get("Password"));
+        }
+        if(credentials.get("Confirm Password") != null)
+            inputValue(confirmPasswordNameInput, credentials.get("Confirm Password"));
     }
 
     public void verifyVisibilityOfValidationForAllInputs(boolean visible) {

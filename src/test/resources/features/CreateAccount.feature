@@ -37,3 +37,26 @@ Feature: Create new user in Luma Shop
       | John       | Kowalski  | [RANDOM] | testPassword789 | WRONG_PASSWORD123 |
     And user clicks Create an Account button
     Then confirm password validation should be visible with text "Please enter the same value again."
+
+  @Registration
+  Scenario: Verify behavior of the Password Strength indicator
+  https://magisterka.atlassian.net/browse/PRAC-60
+
+    When user clicks Create an Account button from Top Menu
+    Then Password Strength should be "No Password"
+    When user inputs following details for new user
+      | Password |
+      | aaaaaa   |
+    Then Password Strength should be "Weak"
+    When user inputs following details for new user
+      | Password |
+      | LFap12@1 |
+    Then Password Strength should be "Medium"
+    When user inputs following details for new user
+      | Password  |
+      | RTas12%^2 |
+    Then Password Strength should be "Strong"
+    When user inputs following details for new user
+      | Password    |
+      | RTas12%^2jo |
+    Then Password Strength should be "Very Strong"
