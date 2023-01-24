@@ -60,3 +60,21 @@ Feature: Create new user in Luma Shop
       | Password    |
       | RTas12%^2jo |
     Then Password Strength should be "Very Strong"
+
+  @Registration
+  Scenario: Verify validation of the Password input
+  https://magisterka.atlassian.net/browse/PRAC-62
+
+    When user clicks Create an Account button from Top Menu
+    And user inputs following details for new user
+      | Password |
+      | aaaaaa   |
+    Then password validation should be visible with text "Minimum length of this field must be equal or greater than 8 symbols. Leading and trailing spaces will be ignored."
+    When user inputs following details for new user
+      | Password |
+      | aaaaaaaa |
+    Then password validation should be visible with text "Minimum of different classes of characters in password is 3. Classes of characters: Lower Case, Upper Case, Digits, Special Characters."
+    When user inputs following details for new user
+      | Password              |
+      | [SPACE][SPACE][SPACE] |
+    Then password validation should be visible with text "This is a required field."

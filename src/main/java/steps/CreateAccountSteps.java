@@ -46,4 +46,9 @@ public class CreateAccountSteps {
         String actualStrength = createAccountPage.getText(createAccountPage.getPasswordStrengthMeter()).replace("Password Strength: ", "");
         Assert.assertEquals(actualStrength, expectedStrength, "Wrong Password Strength message");
     }
+
+    @Then("password validation should be visible with text {string}")
+    public void verifyValidationOfPassword(String validationMessage) {
+        Assert.assertEquals(createAccountPage.getText(createAccountPage.getPasswordValidation()), validationMessage, "Wrong validation message");
+    }
 }
