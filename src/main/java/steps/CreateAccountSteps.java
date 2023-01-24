@@ -30,4 +30,9 @@ public class CreateAccountSteps {
     public void verifyIfConfirmationMessageIsVisible() {
         Assert.assertTrue(createAccountPage.isElementVisible(createAccountPage.getRegistrationConfirmMessage()), "Message wasn't visible");
     }
+
+    @Then("validation messages for all inputs in Create Account should be {string}")
+    public void verifyCreateAccountInputs(String visibility) {
+        createAccountPage.verifyVisibilityOfValidationForAllInputs(visibility.equals("visible"));
+    }
 }

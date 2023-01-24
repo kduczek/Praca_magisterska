@@ -2,6 +2,7 @@ package pages;
 
 import io.cucumber.datatable.DataTable;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 
 import java.util.Map;
 import java.util.Random;
@@ -14,6 +15,13 @@ public class CreateAccountPage extends BasePage {
     private final By passwordNameInput = By.xpath("//input[@id='password']");
     private final By confirmPasswordNameInput = By.xpath("//input[@id='password-confirmation']");
     private final By registrationConfirmMessage = By.xpath("//div[@class='messages']//div[contains(text(), 'Thank you for registering')]");
+
+    //VALIDATION
+    private final By firstNameRequired = By.xpath("//div[@id='firstname-error']");
+    private final By lastNameRequired = By.xpath("//div[@id='lastname-error']");
+    private final By emailRequired = By.xpath("//div[@id='email_address-error']");
+    private final By passwordRequired = By.xpath("//div[@id='password-error']");
+    private final By confirmPasswordRequired = By.xpath("//div[@id='password-confirmation-error']");
 
     public By getCreateAnAccountButton() {
         return createAnAccountButton;
@@ -60,5 +68,21 @@ public class CreateAccountPage extends BasePage {
         }
         inputValue(passwordNameInput, credentials.get("Password"));
         inputValue(confirmPasswordNameInput, credentials.get("Confirm Password"));
+    }
+
+    public void verifyVisibilityOfValidationForAllInputs(boolean visible) {
+        if(visible) {
+            Assert.assertTrue(isElementVisible(firstNameRequired) &&
+                                        isElementVisible(lastNameRequired) &&
+                                        isElementVisible(emailRequired) &&
+                                        isElementVisible(passwordRequired) &&
+                                        isElementVisible(confirmPasswordRequired));
+        } else {
+            Assert.assertFalse(isElementVisible(firstNameRequired) &&
+                                        isElementVisible(lastNameRequired) &&
+                                        isElementVisible(emailRequired) &&
+                                        isElementVisible(passwordRequired) &&
+                                        isElementVisible(confirmPasswordRequired));
+        }
     }
 }
