@@ -1,7 +1,7 @@
 Feature: Product page in Luma Shop
 
   Background:
-    Given user is on Luma Shop home page "https://magento.softwaretestingboard.com"
+    Given user is on Luma Shop home page
 
   @Searching @ProductPage
   Scenario: Verify validation messages in product page

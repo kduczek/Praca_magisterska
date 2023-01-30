@@ -1,7 +1,7 @@
 Feature: Using search feature in Luma Shop
 
   Background:
-    Given user is on Luma Shop home page "https://magento.softwaretestingboard.com"
+    Given user is on Luma Shop home page
 
   @Searching
   Scenario: Search for phrase and verify number of results
@@ -105,7 +105,7 @@ Feature: Using search feature in Luma Shop
     And user selects price filter option with following starting price "$40.00"
     Then Clear All filters button should be visible
     And all active filters should be equal to following
-      | Price      | $40.00 - $49.99 |
+      | Price | $40.00 - $49.99 |
     When user clicks Clear All filters button
     Then Clear All filters button should not be visible
 
@@ -119,9 +119,9 @@ Feature: Using search feature in Luma Shop
     And user selects price filter option with following starting price "$40.00"
     Then Clear All filters button should be visible
     And all active filters should be equal to following
-      | Price      | $40.00 - $49.99 |
+      | Price | $40.00 - $49.99 |
     When user expands shopping option named "Activity"
     And user selects filter option named "Travel"
     Then all active filters should be equal to following
-      | Price      | $40.00 - $49.99 |
-      | Activity   | Travel          |
+      | Price    | $40.00 - $49.99 |
+      | Activity | Travel          |

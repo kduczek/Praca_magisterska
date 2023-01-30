@@ -13,25 +13,26 @@ public class HomePageSteps {
     private final TopMenuPage topMenuPage = new TopMenuPage();
     private final HomePage homePage = new HomePage();
 
-    @Given("user is on Luma Shop home page {string}")
-    public void openBasePage(String url) {
-        getDriver().get(url);
+    @Given("user is on Luma Shop home page")
+    public void openBasePage() {
+        getDriver().get("https://magento.softwaretestingboard.com");
+    }
+
+    @Then("default greetings message should be visible in Top Menu")
+    public void verifyVisibilityOfDefaultGreetingsMessage() {
+        Assert.assertTrue(topMenuPage.isElementVisible(topMenuPage.getDefaultGreetingsSpan()),
+                "Default greetings message wasn't visible");
+    }
+
+    @When("user clicks on arrow next to greetings message to open dropdown")
+    public void clickOnArrowToExpandAccordion() {
+        topMenuPage.clickElement(topMenuPage.getCustomerMenuArrow());
     }
 
     @Then("greetings message {string} should be visible in Top Menu")
     public void verifyGreetingsMessage(String message) {
         topMenuPage.waitUntilTextEquals(topMenuPage.getGreetingsSpan(), "Default welcome msg!");
         Assert.assertEquals(topMenuPage.getText(topMenuPage.getGreetingsSpan()), message, "Wrong greeting message");
-    }
-
-    @Then("default greetings message should be visible in Top Menu")
-    public void verifyVisibilityOfDefaultGreetingsMessage() {
-        Assert.assertTrue(topMenuPage.isElementVisible(topMenuPage.getDefaultGreetingsSpan()), "Default greetings message wasn't visible");
-    }
-
-    @When("user clicks on arrow next to greetings message to open dropdown")
-    public void clickOnArrowToExpandAccordion() {
-        topMenuPage.clickElement(topMenuPage.getCustomerMenuArrow());
     }
 
     @When("user clicks on Sign Out button")

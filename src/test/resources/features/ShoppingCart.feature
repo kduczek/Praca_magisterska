@@ -1,17 +1,17 @@
 Feature: Using shopping cart feature in Luma Shop
 
   Background:
-    Given user is on Luma Shop home page "https://magento.softwaretestingboard.com"
+    Given user is on Luma Shop home page
+    When user searches for "LAYLA"
+    Then search results indicator should be equal to "1 Item"
+    And number of elements on page should be equal to 1
+    When user clicks on "Layla Tee" product link
 
   @Searching @ShoppingCart @ProductPage
   Scenario: Search for a product and add it to the cart
   https://magisterka.atlassian.net/browse/PRAC-16
 
-    When user searches for "LAYLA"
-    Then search results indicator should be equal to "1 Item"
-    And number of elements on page should be equal to 1
-    When user clicks on "Layla Tee" product link
-    And user clicks on "S" size
+    When user clicks on "S" size
     And user clicks on "Green" color
     And user inputs 2 into Qty field
     And user clicks Add to Cart button
@@ -22,11 +22,7 @@ Feature: Using shopping cart feature in Luma Shop
   Scenario: Search for a product, add it to the cart and then remove
   https://magisterka.atlassian.net/browse/PRAC-34
 
-    When user searches for "LAYLA"
-    Then search results indicator should be equal to "1 Item"
-    And number of elements on page should be equal to 1
-    When user clicks on "Layla Tee" product link
-    And user clicks on "S" size
+    When user clicks on "S" size
     And user clicks on "Green" color
     And user inputs 1 into Qty field
     And user clicks Add to Cart button
@@ -41,11 +37,7 @@ Feature: Using shopping cart feature in Luma Shop
   Scenario: Search for a product, add it to the cart, click remove icon and the decline removing
   https://magisterka.atlassian.net/browse/PRAC-36
 
-    When user searches for "LAYLA"
-    Then search results indicator should be equal to "1 Item"
-    And number of elements on page should be equal to 1
-    When user clicks on "Layla Tee" product link
-    And user clicks on "S" size
+    When user clicks on "S" size
     And user clicks on "Green" color
     And user inputs 1 into Qty field
     And user clicks Add to Cart button
@@ -60,11 +52,7 @@ Feature: Using shopping cart feature in Luma Shop
   Scenario: Search for a product, add it to the cart, and verify Cart Subtotal
   https://magisterka.atlassian.net/browse/PRAC-38
 
-    When user searches for "LAYLA"
-    Then search results indicator should be equal to "1 Item"
-    And number of elements on page should be equal to 1
-    When user clicks on "Layla Tee" product link
-    And user clicks on "S" size
+    When user clicks on "S" size
     And user clicks on "Green" color
     And user inputs 1 into Qty field
     And user clicks Add to Cart button
@@ -77,11 +65,7 @@ Feature: Using shopping cart feature in Luma Shop
   Scenario: Search for a product, add it to the cart, and verify Cart Subtotal after updating Quantity
   https://magisterka.atlassian.net/browse/PRAC-40
 
-    When user searches for "LAYLA"
-    Then search results indicator should be equal to "1 Item"
-    And number of elements on page should be equal to 1
-    When user clicks on "Layla Tee" product link
-    And user clicks on "S" size
+    When user clicks on "S" size
     And user clicks on "Green" color
     And user inputs 1 into Qty field
     And user clicks Add to Cart button
@@ -99,11 +83,7 @@ Feature: Using shopping cart feature in Luma Shop
   Scenario: Search for a product, add it to the cart, and verify its Details
   https://magisterka.atlassian.net/browse/PRAC-42
 
-    When user searches for "LAYLA"
-    Then search results indicator should be equal to "1 Item"
-    And number of elements on page should be equal to 1
-    When user clicks on "Layla Tee" product link
-    And user clicks on "S" size
+    When user clicks on "S" size
     And user clicks on "Green" color
     And user inputs 1 into Qty field
     And user clicks Add to Cart button
