@@ -11,6 +11,8 @@ Feature: Login to Luma Shop Application
     When user enters valid credentials into login and password inputs
     And user clicks on Sign In button
     Then greetings message "Welcome, Selenium Test!" should be visible in Top Menu
+    When user clicks on arrow next to greetings message to open dropdown
+    And user clicks on Sign Out button
 
   @Login
   Scenario: Login with valid credentials and log out
