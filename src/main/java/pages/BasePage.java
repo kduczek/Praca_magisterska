@@ -18,7 +18,7 @@ public class BasePage {
 
     public void clickElementJS(By element) {
         WebElement webElement = getDriver().findElement(element);
-        JavascriptExecutor executor = (JavascriptExecutor)getDriver();
+        JavascriptExecutor executor = (JavascriptExecutor) getDriver();
         executor.executeScript("arguments[0].click();", webElement);
     }
 
@@ -127,8 +127,12 @@ public class BasePage {
     public List<String> getTextFromAllItems(List<WebElement> elements) {
         List<String> result = new ArrayList<>();
 
-        for(WebElement singleElement : elements) {
-            result.add(singleElement.getText());
+        for (WebElement singleElement : elements) {
+            try {
+                result.add(singleElement.getText());
+            } catch (StaleElementReferenceException e) {
+                result.add(singleElement.getText());
+            }
         }
 
         return result;

@@ -122,6 +122,7 @@ public class SearchResultsPage extends BasePage {
     }
 
     public boolean areElementsSortedByName(String order) {
+        waitForPageToLoad();
         List<WebElement> elements = DriverProvider.getDriver().findElements(productName);
         List<String> productNames = getTextFromAllItems(elements);
 
