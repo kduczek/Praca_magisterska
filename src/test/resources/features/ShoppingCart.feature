@@ -17,6 +17,9 @@ Feature: Using shopping cart feature in Luma Shop
     And user clicks Add to Cart button
     Then product page success message with "You added Layla Tee to your shopping cart." text should be visible
     And number of products in cart should be equal to 2
+    When user clicks shopping cart icon
+    And user clicks delete icon in shopping cart
+    And user allows deleting item from cart
 
   @Searching @ShoppingCart @ProductPage
   Scenario: Search for a product, add it to the cart and then remove
@@ -47,6 +50,8 @@ Feature: Using shopping cart feature in Luma Shop
     And user clicks delete icon in shopping cart
     And user declines deleting item from cart
     Then number of products in cart should be equal to 1
+    When user clicks delete icon in shopping cart
+    And user allows deleting item from cart
 
   @Searching @ShoppingCart @ProductPage
   Scenario: Search for a product, add it to the cart, and verify Cart Subtotal
@@ -60,6 +65,9 @@ Feature: Using shopping cart feature in Luma Shop
     And number of products in cart should be equal to 1
     When user clicks shopping cart icon
     Then Cart Subtotal should be equal to "$29.00"
+    When user clicks delete icon in shopping cart
+    And user allows deleting item from cart
+
 
   @Searching @ShoppingCart @ProductPage
   Scenario: Search for a product, add it to the cart, and verify Cart Subtotal after updating Quantity
@@ -78,6 +86,9 @@ Feature: Using shopping cart feature in Luma Shop
     And user waits 4 seconds
     Then number of products in cart should be equal to 3
     And Cart Subtotal should be equal to "$87.00"
+    When user clicks delete icon in shopping cart
+    And user allows deleting item from cart
+
 
   @Searching @ShoppingCart @ProductPage
   Scenario: Search for a product, add it to the cart, and verify its Details
@@ -93,3 +104,5 @@ Feature: Using shopping cart feature in Luma Shop
     And user clicks See Detail pane in Cart
     Then size in expanded details should be "S"
     And color in expanded details should be "Green"
+    When user clicks delete icon in shopping cart
+    And user allows deleting item from cart
