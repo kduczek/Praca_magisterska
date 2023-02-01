@@ -18,7 +18,7 @@ public class SearchResultsPage extends BasePage {
     private final By sortingOrderSwitch = By.xpath("//a[@data-role='direction-switcher']");
     private final By relatedSearchTerms = By.xpath("//dl/dt[normalize-space(.)='Related search terms']/../dd");
 
-   //FILTERING
+    //FILTERING
     private final String shoppingOption = "//div[normalize-space(.)='[OPTION]']";
     private final String priceFilter = "//div[@class='filter-options-content']//a/span[contains(text(), '[PRICE]')]";
     private final String generalFilterOption = "//div[@class='filter-options-content']/ol/li/a[contains(text(), '[NAME]')]";
@@ -123,14 +123,12 @@ public class SearchResultsPage extends BasePage {
 
     public boolean areElementsSortedByName(String order) {
         waitForPageToLoad();
-        List<WebElement> elements = DriverProvider.getDriver().findElements(productName);
-        List<String> productNames = getTextFromAllItems(elements);
+        List<String> productNames = getTextFromAllItems(productName);
 
         List<String> sortedList = new ArrayList<>(productNames);
         Collections.sort(productNames);
         if (order.equals("descending"))
             Collections.reverse(sortedList);
-
         return sortedList.equals(productNames);
     }
 
@@ -160,8 +158,7 @@ public class SearchResultsPage extends BasePage {
     }
 
     public void verifyRelatedSearchTerms(String keyword) {
-        List<WebElement> elements = DriverProvider.getDriver().findElements(relatedSearchTerms);
-        List<String> relatedSearchTermsList = getTextFromAllItems(elements);
+        List<String> relatedSearchTermsList = getTextFromAllItems(relatedSearchTerms);
 
         for (String singleSearchTerm : relatedSearchTermsList) {
             Assert.assertTrue(singleSearchTerm.toLowerCase().contains(keyword.toLowerCase()), "Related Search Term " + singleSearchTerm + " doesn't contained keyword");
@@ -180,7 +177,7 @@ public class SearchResultsPage extends BasePage {
 
         for (double value : prices) {
             if (value < startingPrice || value > endPrice)
-                    return false;
+                return false;
         }
 
         return true;

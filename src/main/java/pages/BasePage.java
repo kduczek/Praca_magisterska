@@ -124,13 +124,19 @@ public class BasePage {
         });
     }
 
-    public List<String> getTextFromAllItems(List<WebElement> elements) {
+    public List<String> getTextFromAllItems(By pointer) {
+        List<WebElement> elements;
         List<String> result = new ArrayList<>();
 
-        for (WebElement singleElement : elements) {
-            try {
+        try {
+            elements = getDriver().findElements(pointer);
+            for (WebElement singleElement : elements) {
                 result.add(singleElement.getText());
-            } catch (StaleElementReferenceException e) {
+            }
+        } catch (StaleElementReferenceException e) {
+            result.clear();
+            elements = getDriver().findElements(pointer);
+            for (WebElement singleElement : elements) {
                 result.add(singleElement.getText());
             }
         }
